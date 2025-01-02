@@ -13,27 +13,11 @@ declare(strict_types=1);
 namespace FoT3\Rdct\ViewHelpers;
 
 use FoT3\Rdct\Redirects;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class RedirectViewHelper extends AbstractViewHelper
 {
-
-    /**
-     * @var Redirects
-     */
-    protected $rdct;
-
-    /**
-     * @param Redirects $rdct
-     */
-    public function injectRdct(Redirects $rdct): void
-    {
-        $this->rdct = $rdct;
-    }
-
-    /**
-     * @return void
-     */
     public function initializeArguments(): void
     {
         $this->registerArgument('inUrl', 'string', 'Input URL', true);
@@ -41,11 +25,8 @@ class RedirectViewHelper extends AbstractViewHelper
         $this->registerArgument('indexScriptUrl', 'string', 'URL of "index script" - the prefix of the "?RDCT=..." parameter. If not supplied it will default to \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv(TYPO3_REQUEST_DIR).index.php', false, '');
     }
 
-    /**
-     * @return string
-     */
     public function render(): string
     {
-        return $this->rdct->makeRedirectUrl($this->arguments['inUrl'], $this->arguments['length'], $this->arguments['indexScriptUrl']);
+        return GeneralUtility::makeInstance(Redirects::class)->makeRedirectUrl($this->arguments['inUrl'], $this->arguments['length'], $this->arguments['indexScriptUrl']);
     }
 }

@@ -1,5 +1,5 @@
 {
-	"name": "friendsoftypo3/rdct",
+	"name": "telekom/rdct",
 	"type": "typo3-cms-extension",
 	"description": "Frontend redirects based on RDCT GET parameter",
 	"homepage": "https://extensions.typo3.org/extension/rdct",
